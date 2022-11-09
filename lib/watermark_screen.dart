@@ -12,7 +12,12 @@ class _WatermarkScreenState extends State<WatermarkScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Add watermark to images")),
-      body: Container(),
+      body: Container(
+        child: const IconButton(
+          icon: Icon(Icons.camera_alt_outlined),
+          onPressed: null,
+        ),
+      ),
     );
   }
 }
