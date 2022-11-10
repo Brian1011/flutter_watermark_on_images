@@ -1,5 +1,5 @@
 # Project
-A Flutter project.
+A Flutter App project.
 
 ## About
 This is a flutter application that allows the user to add watermark text on images.
