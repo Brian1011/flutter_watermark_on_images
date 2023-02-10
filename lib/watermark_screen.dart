@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 class WatermarkScreen extends StatefulWidget {
@@ -8,7 +10,10 @@ class WatermarkScreen extends StatefulWidget {
 }
 
 class _WatermarkScreenState extends State<WatermarkScreen> {
-  takePhoto() {}
+  takePhoto() async {
+    File assetFile;
+    File _watermarkedImage;
+  }
 
   @override
   Widget build(BuildContext context) {
