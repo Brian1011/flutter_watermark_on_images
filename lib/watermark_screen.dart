@@ -8,14 +8,18 @@ class WatermarkScreen extends StatefulWidget {
 }
 
 class _WatermarkScreenState extends State<WatermarkScreen> {
+  takePhoto() {}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Add watermark to images")),
       body: Container(
-        child: const IconButton(
-          icon: Icon(Icons.camera_alt_outlined),
-          onPressed: null,
+        child: const Center(
+          child: IconButton(
+            icon: Icon(Icons.camera_alt_outlined, size: 40),
+            onPressed: null,
+          ),
         ),
       ),
     );
