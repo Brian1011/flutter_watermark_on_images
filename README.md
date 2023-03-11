@@ -1,11 +1,11 @@
-# Project
+# Flutter watermark on images 
 This is a Flutter mobile application Illustrates how to add add watermark text on images.
 
 In this project, I used an asset Image and added a watermark text ("flutter is awesome") on it.
 You can use any image from your gallery or camera.
 
 ## Demo
-
+![Recorded demo gif](https://github.com/Brian1011/flutter_watermark_on_images/blob/main/assets/flutter_watermark_on_images.gif)
 
 ## Versions used
 Flutter: 2.10.4
@@ -24,6 +24,8 @@ Dart: 2.16.2
 - Run `flutter run` or `fvm flutter run` to run the app
 
 ## Author
-- [Brian Mutinda](https://github.com/Brian1011)
+Designed and implemented by Maingi Brian.
+
+- [Github](https://github.com/Brian1011)
 - [Twitter](https://twitter.com/brian_1011_dev)
 - [LinkedIn](https://www.linkedin.com/in/brian-mutinda-366064163)
