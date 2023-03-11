@@ -16,9 +16,9 @@ class WatermarkScreen extends StatefulWidget {
 class _WatermarkScreenState extends State<WatermarkScreen> {
   String assetFilePath = 'assets/rectangle_image.png';
 
-  Future<File> getFileFromAsset(String path) async {
-    final byteData = await rootBundle.load(path);
-    final file = File('${(await getTemporaryDirectory()).path}/$path');
+  Future<File> getFileFromAsset() async {
+    final byteData = await rootBundle.load(assetFilePath);
+    final file = File('${(await getTemporaryDirectory()).path}/image.png');
     await file.writeAsBytes(byteData.buffer
         .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
     return file;
@@ -27,7 +27,7 @@ class _WatermarkScreenState extends State<WatermarkScreen> {
   File? watermarkedImage;
 
   addWaterMarkToPhoto() async {
-    File assetFile = await getFileFromAsset(assetFilePath);
+    File assetFile = await getFileFromAsset();
     // decode image and return new image
     ui.Image? originalImage = ui.decodeImage(assetFile.readAsBytesSync());
 
