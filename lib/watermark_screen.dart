@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:image/image.dart' as ui;
 import 'package:path_provider/path_provider.dart';
@@ -58,35 +58,39 @@ class _WatermarkScreenState extends State<WatermarkScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(title: const Text("Add watermark to images")),
-        body: Container(
-          width: double.infinity,
-          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Image.asset(
-                assetFilePath,
-                height: 200,
-                width: 200,
+    return CupertinoApp(
+        home: CupertinoPageScaffold(
+            navigationBar: const CupertinoNavigationBar(
+              middle: Text("Add watermark to images"),
+            ),
+            child: Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    assetFilePath,
+                    height: 200,
+                    width: 200,
+                  ),
+                  const SizedBox(height: 20),
+                  CupertinoButton.filled(
+                      child: const Text("Add watermark"),
+                      onPressed: () {
+                        addWaterMarkToPhoto();
+                      }),
+                  const SizedBox(height: 20),
+                  watermarkedImage != null
+                      ? Image.file(
+                          watermarkedImage!,
+                          height: 200,
+                          width: 200,
+                        )
+                      : const SizedBox.shrink(),
+                ],
               ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: addWaterMarkToPhoto,
-                child: const Text("Add water mark"),
-              ),
-              const SizedBox(height: 20),
-              watermarkedImage != null
-                  ? Image.file(
-                      watermarkedImage!,
-                      height: 200,
-                      width: 200,
-                    )
-                  : const SizedBox.shrink(),
-            ],
-          ),
-        ));
+            )));
   }
 }
