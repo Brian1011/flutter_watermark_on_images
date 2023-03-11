@@ -5,11 +5,11 @@ In this project, I used an asset Image and added a watermark text ("flutter is a
 You can use any image from your gallery or camera.
 
 ## Demo
-![Recorded demo gif](https://github.com/Brian1011/flutter_watermark_on_images/blob/main/assets/flutter_watermark_on_images.gif)
+![Recorded demo gif](https://github.com/Brian1011/flutter_watermark_on_images/blob/main/assets/flutter_watermark_demo.gif)
 
 ## Versions used
-Flutter: 2.10.4
-Dart: 2.16.2
+- Flutter: 2.10.4
+- Dart: 2.16.2
 
 ## Packages used
 - [image_picker: ^0.8.5+3](https://pub.dev/packages/image_picker)
