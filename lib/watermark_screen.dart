@@ -27,14 +27,16 @@ class _WatermarkScreenState extends State<WatermarkScreen> {
   File? watermarkedImage;
 
   addWaterMarkToPhoto() async {
+    // get the image file
     File assetFile = await getFileFromAsset();
+
     // decode image and return new image
     ui.Image? originalImage = ui.decodeImage(assetFile.readAsBytesSync());
 
     // watermark text
     String waterMarkText = "flutter is awesome";
 
-    // add watermark to image
+    // add watermark to image and specify the position
     ui.drawString(originalImage!, ui.arial_24, 10, (originalImage.height - 150),
         waterMarkText);
 
