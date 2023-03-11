@@ -7,7 +7,7 @@ You can use any image from your gallery or camera.
 ## Demo
 ![Recorded demo gif](https://github.com/Brian1011/flutter_watermark_on_images/blob/main/assets/flutter_watermark_demo.gif)
 
-## Versions used
+## Flutter and dart versions used
 - Flutter: 2.10.4
 - Dart: 2.16.2
 
