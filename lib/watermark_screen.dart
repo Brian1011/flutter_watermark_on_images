@@ -35,7 +35,7 @@ class _WatermarkScreenState extends State<WatermarkScreen> {
     String waterMarkText = "flutter is awesome";
 
     // add watermark to image
-    ui.drawString(originalImage!, ui.arial_24, 10, (originalImage.height - 210),
+    ui.drawString(originalImage!, ui.arial_24, 10, (originalImage.height - 150),
         waterMarkText);
 
     // create temporary directory on storage
