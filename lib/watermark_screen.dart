@@ -15,6 +15,7 @@ class WatermarkScreen extends StatefulWidget {
 
 class _WatermarkScreenState extends State<WatermarkScreen> {
   String assetFilePath = 'assets/rectangle_image.png';
+  File? watermarkedImage;
 
   Future<File> getFileFromAsset() async {
     final byteData = await rootBundle.load(assetFilePath);
@@ -23,8 +24,6 @@ class _WatermarkScreenState extends State<WatermarkScreen> {
         .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
     return file;
   }
-
-  File? watermarkedImage;
 
   addWaterMarkToPhoto() async {
     // get the image file
