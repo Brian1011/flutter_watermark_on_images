@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image/image.dart' as ui;
 import 'package:path_provider/path_provider.dart';
 
@@ -15,11 +16,18 @@ class WatermarkScreen extends StatefulWidget {
 class _WatermarkScreenState extends State<WatermarkScreen> {
   String assetFilePath = 'assets/rectangle_image.png';
 
-  late File assetFile;
+  Future<File> getFileFromAsset(String path) async {
+    final byteData = await rootBundle.load(path);
+    final file = File('${(await getTemporaryDirectory()).path}/$path');
+    await file.writeAsBytes(byteData.buffer
+        .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
+    return file;
+  }
 
   File? watermarkedImage;
 
   addWaterMarkToPhoto() async {
+    File assetFile = await getFileFromAsset(assetFilePath);
     // decode image and return new image
     ui.Image? originalImage = ui.decodeImage(assetFile.readAsBytesSync());
 
@@ -59,7 +67,7 @@ class _WatermarkScreenState extends State<WatermarkScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image.asset(
-                'assets/rectangle_image.png',
+                assetFilePath,
                 height: 200,
                 width: 200,
               ),
