@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image/image.dart' as ui;
 import 'package:path_provider/path_provider.dart';
@@ -16,6 +17,13 @@ class WatermarkScreen extends StatefulWidget {
 class _WatermarkScreenState extends State<WatermarkScreen> {
   String assetFilePath = 'assets/rectangle_image.png';
   File? watermarkedImage;
+  bool loading = false;
+
+  setLoadingStatus(bool value) {
+    setState(() {
+      loading = value;
+    });
+  }
 
   Future<File> getFileFromAsset() async {
     final byteData = await rootBundle.load(assetFilePath);
@@ -26,6 +34,8 @@ class _WatermarkScreenState extends State<WatermarkScreen> {
   }
 
   addWaterMarkToPhoto() async {
+    setLoadingStatus(true);
+
     // get the image file
     File assetFile = await getFileFromAsset();
 
@@ -51,9 +61,11 @@ class _WatermarkScreenState extends State<WatermarkScreen> {
         .writeAsBytesSync(ui.encodePng(originalImage));
 
     // set watermarked image from image path
-    setState(() {
-      watermarkedImage = File(tempDir.path + '/$randomFileName.png');
-    });
+    watermarkedImage = File(tempDir.path + '/$randomFileName.png');
+
+    // delay for an extra second
+    await Future.delayed(const Duration(seconds: 1));
+    setLoadingStatus(false);
   }
 
   @override
@@ -66,31 +78,42 @@ class _WatermarkScreenState extends State<WatermarkScreen> {
             child: Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    assetFilePath,
-                    height: 200,
-                    width: 200,
-                  ),
-                  const SizedBox(height: 20),
-                  CupertinoButton.filled(
-                      child: const Text("Add watermark"),
-                      onPressed: () {
-                        addWaterMarkToPhoto();
-                      }),
-                  const SizedBox(height: 20),
-                  watermarkedImage != null
-                      ? Image.file(
-                          watermarkedImage!,
+              child: loading
+                  ? const Center(child: CupertinoActivityIndicator())
+                  : Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const Text("Before watermark"),
+                        const SizedBox(height: 10),
+                        Image.asset(
+                          assetFilePath,
                           height: 200,
                           width: 200,
-                        )
-                      : const SizedBox.shrink(),
-                ],
-              ),
+                        ),
+                        const SizedBox(height: 20),
+                        CupertinoButton.filled(
+                            child: const Text("Add watermark"),
+                            onPressed: () {
+                              addWaterMarkToPhoto();
+                            }),
+                        const SizedBox(height: 20),
+                        watermarkedImage != null
+                            ? Column(
+                                children: [
+                                  const Divider(),
+                                  const Text("With watermark"),
+                                  const SizedBox(height: 10),
+                                  Image.file(
+                                    watermarkedImage!,
+                                    height: 200,
+                                    width: 200,
+                                  ),
+                                ],
+                              )
+                            : const SizedBox.shrink(),
+                      ],
+                    ),
             )));
   }
 }
